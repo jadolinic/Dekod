@@ -27,32 +27,31 @@ export const EmployeeProvider = ({ children }) => {
   const [formErrors, setFormErrors] = useState({});
 
   useEffect(() => {
-    const fetchEmployees = async () => {
-      try {
-        const response = await fetch(
-          "/api/paganini/api/job-interview/employees",
-          {
-            method: "GET",
-            headers: {
-              Authorization: "",
-              "Content-Type": "application/json",
-            },
+    const fetchEmployees = () => {
+      fetch("https://api.test.ulaznice.hr/paganini/api/job-interview/employees", {
+        method: "GET",
+        headers: {
+          Authorization: "",
+          "Content-Type": "application/json",
+        },
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`Greška prilikom dohvata podataka: ${response.status}`);
           }
-        );
-        if (!response.ok) {
-          throw new Error(
-            `Greška prilikom dohvata podataka: ${response.status}`
-          );
-        }
-        const data = await response.json();
-        setZaposlenici(data.data);
-      } catch (error) {
-        setError(error.message);
-      }
+          return response.json();
+        })
+        .then(data => {
+          setZaposlenici(data.data);
+        })
+        .catch(error => {
+          setError(error.message);
+        });
     };
-
+  
     fetchEmployees();
   }, []);
+  
 
   useEffect(() => {
     let filterZaposlenika = zaposlenici.filter((zaposlenik) => {

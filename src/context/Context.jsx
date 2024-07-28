@@ -26,6 +26,8 @@ export const EmployeeProvider = ({ children }) => {
   const [formValues, setFormValues] = useState(pocetneVrijednosti);
   const [formErrors, setFormErrors] = useState({});
 
+  /* Dohvaćivanje podataka */
+
   useEffect(() => {
     const fetchEmployees = () => {
       fetch("api/paganini/api/job-interview/employees", {
@@ -52,6 +54,8 @@ export const EmployeeProvider = ({ children }) => {
   
     fetchEmployees();
   }, []);
+
+  /* Filteri po imenu i poziciji */
   
 
   useEffect(() => {
@@ -65,6 +69,8 @@ export const EmployeeProvider = ({ children }) => {
 
       return firstName && jobTitle;
     });
+
+    /* Sortiranje po imenu i poziciji */
 
     if (sortCondition === "firstName") {
       filterZaposlenika = filterZaposlenika.sort((a, b) => a.firstName.localeCompare(b.firstName));
@@ -91,6 +97,8 @@ export const EmployeeProvider = ({ children }) => {
     setSortCondition(e.target.value)
   }
 
+  /* Validacija forme da li je sve ispunjeno prije submitiranja */
+
   const validate = (v) => {
     const errors = {};
     if (!v.ime) {
@@ -109,6 +117,8 @@ export const EmployeeProvider = ({ children }) => {
     return errors;
   };
 
+  /* Submitiranje forme */
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate(formValues);
@@ -119,6 +129,8 @@ export const EmployeeProvider = ({ children }) => {
       setFormValues(pocetneVrijednosti);
     }
   };
+
+  /* Spremanje podataka koji se upisuju u formu */
 
   const handleChange = (e) => {
     e.preventDefault();

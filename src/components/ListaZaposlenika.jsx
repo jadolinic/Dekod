@@ -13,6 +13,8 @@ const ListaZaposlenika = () => {
     handleSortChange
   } = useContext(Context);
 
+  /* Paginacija prvih 10 */
+
   const indexOfLastEmployee = currentPage * employeesPerPage;
   const indexOfFirstEmployee = indexOfLastEmployee - employeesPerPage;
   const currentEmployees = filter.slice(

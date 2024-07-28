@@ -48,7 +48,7 @@ const ListaZaposlenika = () => {
           />
         </div>
         <div className="sortiranje">
-        <label>Sortiraj po: </label>
+        <label>Sortiraj</label>
         <select onChange={handleSortChange}>
           <option value="">-- Odaberi --</option>
           <option value="firstName">Ime</option>

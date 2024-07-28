@@ -28,7 +28,7 @@ export const EmployeeProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchEmployees = () => {
-      fetch("/api/paganini/api/job-interview/employees", {
+      fetch("https://api.test.ulaznice.hr/paganini/api/job-interview/employees", {
         method: "GET",
         headers: {
           Authorization: "",
